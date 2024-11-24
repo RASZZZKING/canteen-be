@@ -23,9 +23,9 @@ const displayMenu = async (
 
     Silahkan ketik pesanan anda: `);
 
-    console.log('====================================');
-    console.log(prompTesting);
-    console.log('====================================');
+  console.log("====================================");
+  console.log(prompTesting);
+  console.log("====================================");
 
   const forReturn = prompTesting;
 
@@ -109,24 +109,24 @@ const willYouFillAgain = async (
 ) => {
   console.log(`Apakah Anda mau pesan ${name} lagi?`);
   const yourAnswer = false;
-  console.log('====================================');
+  console.log("====================================");
   console.log(yourAnswer ? "yes" : "no");
-  console.log('====================================');
+  console.log("====================================");
   if (yourAnswer) {
     whichOrder(cart, name, dataMenu, prompTesting);
   } else return false;
 };
 
-export const filterPerson =  (
+const filterPerson = (
   bannedPerson: FilterPerson,
   luckyPerson: FilterPerson,
   nameUser: string,
   isEatHereTest: boolean
 ) => {
   console.log("Silahkan isi nama anda : ");
-  console.log('====================================');
+  console.log("====================================");
   console.log(nameUser);
-  console.log('====================================');
+  console.log("====================================");
   const user = nameUser;
   const isBlockedPerson = bannedPerson.data.some(
     (name) => name.toLowerCase() === String(user).toLowerCase()
@@ -145,9 +145,9 @@ export const filterPerson =  (
     );
   }
   console.log("Apakah anda mau makan disini?");
-  console.log('====================================');
+  console.log("====================================");
   console.log(isEatHereTest ? "yes" : "no");
-  console.log('====================================');
+  console.log("====================================");
   const isEatHere = isEatHereTest;
   return {
     name: user,
@@ -156,7 +156,7 @@ export const filterPerson =  (
   };
 };
 
-export const acceptData = async (dummyData: {
+const acceptData = async (dummyData: {
   menu: Menu;
   bannedPerson: FilterPerson;
   luckyPerson: FilterPerson;
@@ -165,7 +165,7 @@ export const acceptData = async (dummyData: {
   promptOrderFoods: string;
   isOrderDrink: boolean;
   promptOrderDrink: string;
-  isUserPay: boolean
+  isUserPay: boolean;
 }) => {
   try {
     console.log("Selamat Datang di Kedai Cermat");
@@ -189,9 +189,9 @@ export const acceptData = async (dummyData: {
       dummyData.promptOrderFoods
     );
     console.log("Want order drinks?");
-    console.log('====================================');
+    console.log("====================================");
     console.log(dummyData.isOrderDrink ? "yes" : "no");
-    console.log('====================================');
+    console.log("====================================");
     const wantOrderDrinks = dummyData.isOrderDrink;
     if (wantOrderDrinks)
       await orderSomething(
@@ -211,13 +211,13 @@ export const acceptData = async (dummyData: {
         isLuckyPerson: dataUser.isLuckyPerson,
       },
       pesanan,
-      isUserPay: dummyData.isUserPay
+      isUserPay: dummyData.isUserPay,
     };
 
     //proses pesanan
 
     const send = await iPromise(data);
-    return send
+    return send;
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Error :", error.message);
@@ -233,7 +233,7 @@ export const acceptData = async (dummyData: {
   }
 };
 
-export const dataTest = {
+const dataTest = {
   menu,
   bannedPerson,
   luckyPerson,
@@ -242,9 +242,18 @@ export const dataTest = {
   promptOrderFoods: userTesting.promptOrderFoods,
   isOrderDrink: userTesting.isOrderDrink,
   promptOrderDrink: userTesting.promptOrderDrink,
-  isUserPay: userTesting.isUserPay
+  isUserPay: userTesting.isUserPay,
 };
 
 acceptData(dataTest);
 
-
+export {
+  displayMenu,
+  processOrder,
+  addToCart,
+  orderSomething,
+  willYouFillAgain,
+  filterPerson,
+  acceptData,
+  dataTest,
+};
